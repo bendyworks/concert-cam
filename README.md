@@ -71,3 +71,12 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Turn on the camera.
 1. Run `gphoto2 --capture-image` (this will take some time because gphoto2 must scan for the camera and then trigger a picture. The photo remains on the camera unless we ask for the file.)
 1. You should hear the camera shutter click and the commandline will notify you of the new image created.
+
+## Assembling the button:
+
+1. Wire the Teensy to the button (refer to [this post by Raster](http://rasterweb.net/raster/2011/05/09/the-button/))
+1. Flash the Teensy with the code from Raster's blog post with the Arduino IDE + [Teensyduino](http://www.pjrc.com/teensy/teensyduino.html) addon. (Be sure to change the pin number if your button is connected to another IO pin!)
+1. Connect the Teensy to the Button Pi's USB hub.
+1. Open up vim or another text editor (make sure you're in insert mode)
+1. Pressing the button should insert a space into the document.
+1. All set!
