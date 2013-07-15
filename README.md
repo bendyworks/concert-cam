@@ -34,6 +34,7 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 
 ## Initial configuration:
 
+1. In `raspi-config`, expand the filesystem, reset the password, turn on SSH, turn off X at boot, and make sure that the RAM split gives the most RAM to the ARM. Save & exit `raspi-config`
 1. Update everything: `sudo apt-get update && sudo apt-get upgrade raspi-config raspberrypi* && sudo raspi-config`
 1. Select 'Upgrade' in `raspi-config` and then restart after it is complete.
 1. Install some other niceties: `sudo apt-get install vim tmux`
