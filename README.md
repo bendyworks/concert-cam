@@ -41,22 +41,21 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Find the name of the wifi dongle: `ifconfig -a` (you want something like `wlan0` or `wlan1`)
 1. Edit `/etc/network/interfaces` to look like the following:
 
-```
-auto lo
+    ```
+    auto lo
 
-iface lo inet loopback
-iface eth0 inet dhcp
+    iface lo inet loopback
+    iface eth0 inet dhcp
 
 
-auto wlan1
-allow-hotplug wlan1
-iface wlan1 inet dhcp
-        wpa-ssid "YOUR_SSID_HERE"
-        wpa-psk "YOUR_PASSWORD_HERE"
+    auto wlan1
+    allow-hotplug wlan1
+    iface wlan1 inet dhcp
+            wpa-ssid "YOUR_SSID_HERE"
+            wpa-psk "YOUR_PASSWORD_HERE"
 
-iface default inet dhcp
-```
-
+    iface default inet dhcp
+    ```
 1. Restart each Pi: `shutdown -r now`
 1. Confirm that your wifi dongle is working by running `sudo wpa_cli` and then something like `ping google.com`
 1. Your Pi's should now be on your wifi network.
