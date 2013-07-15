@@ -60,7 +60,15 @@ iface default inet dhcp
 1. Restart each Pi: `shutdown -r now`
 1. Confirm that your wifi dongle is working by running `sudo wpa_cli` and then something like `ping google.com`
 1. Your Pi's should now be on your wifi network.
-1. SSH into each Pi (`ssh pi@camera` and `ssh pi@button`)
+1. SSH into each Pi (`ssh pi@camera.local` and `ssh pi@button.local`)
 1. Run `ssh-keygen` -- defaults are fine
 1. Add your public key to `~/.ssh/authorized_keys`
 1. Run `cat .ssh/id_rsa.pub` on each Pi and add the other's public key to `~/.ssh/authorized_keys` so that they can log in to each other without passwords.
+
+## Testing the camera
+
+1. On the Camera Pi, install gphoto2: `sudo apt-get install gphoto2`
+1. Plug in your DSLR with the USB cable provided with the camera.
+1. Turn on the camera.
+1. Run `gphoto2 --capture-image` (this will take some time because gphoto2 must scan for the camera and then trigger a picture. The photo remains on the camera unless we ask for the file.)
+1. You should hear the camera shutter click and the commandline will notify you of the new image created.
