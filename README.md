@@ -57,6 +57,7 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 
     iface default inet dhcp
     ```
+    (be sure to change `wlan1` to whatever your USB wifi dongle is called!)
 1. Restart each Pi: `shutdown -r now`
 1. Confirm that your wifi dongle is working by running `sudo wpa_cli` and then something like `ping google.com`
 1. Your Pi's should now be on your wifi network.
