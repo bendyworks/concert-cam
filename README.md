@@ -71,8 +71,9 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. On the Camera Pi, install gphoto2: `sudo apt-get install gphoto2`
 1. Plug in your DSLR with the USB cable provided with the camera.
 1. Turn on the camera.
-1. Run `gphoto2 --capture-image` (this will take some time because gphoto2 must scan for the camera and then trigger a picture. The photo remains on the camera unless we ask for the file.)
-1. You should hear the camera shutter click and the commandline will notify you of the new image created.
+1. Run `gphoto2 --auto-detect` and note the Model name.
+1. Run `gphoto2 --capture-image-and-download --camera "USB PTP Class Camera"` where `--camera` gets the string of your camera model
+1. You should hear the camera shutter click and the commandline will notify you of the new image created. It should be a RAW file; if not, change your camera settings.
 
 ## Assembling the button:
 
