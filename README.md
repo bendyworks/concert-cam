@@ -80,4 +80,4 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Connect the Teensy to the Button Pi's USB hub.
 1. Open up vim or another text editor (make sure you're in insert mode)
 1. Pressing the button should insert a space into the document.
-1. All set!
+1. The button is all set!
