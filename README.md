@@ -25,10 +25,11 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 * 1x USB 2.0 Powered Hub - 7 Ports with 5V 2A Power Supply (Adafruit)
 * 1x USB WiFi (802.11b/g/n) Module: For Raspberry Pi and more (Adafruit)
 * 1x Adafruit Pi Case- Enclosure for Raspberry Pi Model A or B (Adafruit)
-* 1x USB cable - A/MicroB (Adafruit)
+* 2x USB cable - A/MicroB (Adafruit)
 * 1x 5V 1A (1000mA) USB port power supply - UL Listed
 * 1x USB Battery Pack for Raspberry Pi - 3300mAh - 5V @ 1A and 500mA (Adafruit)
 * 1x Massive Arcade Button with LED - 100mm Green (Adafruit)
+* 1x Teensy (ATmega32u4 USB dev board) 2.0 (Adafruit)
 * 1x Cat5 Ethernet cable (choose your own length, various vendors)
 
 ## Initial configuration:
