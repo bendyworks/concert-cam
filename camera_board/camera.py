@@ -37,7 +37,7 @@ class Camera:
     filename = self.generate_filename()
     print filename
 
-    cmd = "gphoto2 --camera=\"" + self.model + "\" --capture-image-and-download --filename=" + filename
+    cmd = "gphoto2 --camera=\"" + self.model + "\" --capture-image-and-download --filename=\"" + filename + "\""
     print cmd
     os.popen(cmd)
 
