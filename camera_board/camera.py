@@ -33,8 +33,8 @@ class Camera:
     return (model, usb_location)
 
   def capture_photo(self):
-    datetime = str(datetime.datetime.now())
-    filename = "image_" + datetime + ".cr2"
+    date = str(datetime.datetime.now())
+    filename = "image_" + date + ".cr2"
 
     cmd = "gphoto2 --camera \"" + self.model + "\" --capture-image-and-download --filename=" + filename
     os.popen(cmd)
