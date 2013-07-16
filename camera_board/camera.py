@@ -33,9 +33,11 @@ class Camera:
 
   def capture_photo(self):
     date = str(datetime.datetime.now())
-    filename = "image_" + date + ".cr2"
+    filename = "../image_" + date + ".cr2".replace(' ', '_')
+    print filename
 
-    cmd = "gphoto2 --capture-image-and-download --filename=" + filename
+    cmd = "gphoto2 --camera=\"" + self.model + "\" --capture-image-and-download --filename=" + filename
+    print cmd
     os.popen(cmd)
 
     return filename

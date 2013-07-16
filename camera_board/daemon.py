@@ -2,6 +2,8 @@ from camera import Camera
 from config import Config
 from flask import Flask
 
+import os
+
 app = Flask(__name__)
 
 config = Config()
@@ -35,5 +37,7 @@ if __name__ == "__main__":
   # Camera found, so print some info about it:
   camera.print_camera_info()
 
-  app.debug = True
+  if len(os.environ.get('FLASK_DEBUG')) > 0:
+    app.debug = True
+
   app.run(host='0.0.0.0')
