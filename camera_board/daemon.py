@@ -23,8 +23,8 @@ def snap_index():
 @app.route("/snap/<password>")
 def snap(password):
   if password == config.secret_key:
-    camera.capture_photo()
-    return "200 OK"
+    new_filename = camera.capture_photo()
+    return new_filename
   else:
     return go_away()
 
