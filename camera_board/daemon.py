@@ -37,7 +37,8 @@ if __name__ == "__main__":
   # Camera found, so print some info about it:
   camera.print_camera_info()
 
-  if len(os.environ.get('FLASK_DEBUG')) > 0:
+  flask_debug = os.environ.get('FLASK_DEBUG') or False
+  if flask_debug:
     app.debug = True
 
   app.run(host='0.0.0.0')
