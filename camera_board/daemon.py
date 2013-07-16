@@ -32,5 +32,8 @@ if __name__ == "__main__":
   camera.detect_gphoto()
   camera.setup()
 
+  # Camera found, so print some info about it:
+  camera.print_camera_info()
+
   app.debug = True
   app.run(host='0.0.0.0')

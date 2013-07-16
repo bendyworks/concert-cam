@@ -27,6 +27,10 @@ class Camera:
 
     return (model, usb_location)
 
+  def print_camera_info(self):
+    print "Camera: " + self.model
+    print "USB Location: " + self.usb_location
+
   def capture_photo(self):
     date = str(datetime.datetime.now())
     filename = "image_" + date + ".cr2"
@@ -35,4 +39,3 @@ class Camera:
     os.popen(cmd)
 
     return filename
-
