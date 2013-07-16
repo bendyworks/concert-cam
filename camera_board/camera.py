@@ -8,7 +8,7 @@ class Camera:
   def detect_gphoto(self):
     location = os.popen('which gphoto2').read().rstrip()
     if location != "":
-      return True
+      return ""
     else:
       return "Error: gphoto2 not found!"
 
@@ -19,7 +19,8 @@ class Camera:
     if not re.match("{-}+", camera_string):
       model, usb_location = self.parse_camera_string(camera_string)
 
-      return "Camera is: " + model + "\n" + "Location is: " + usb_location
+      #return "Camera is: " + model + "\n" + "Location is: " + usb_location
+      return True
     else:
       return "Error: Camera cannot be found!"
 
