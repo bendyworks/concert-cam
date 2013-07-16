@@ -32,6 +32,13 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 * 1x Teensy (ATmega32u4 USB dev board) 2.0 (Adafruit)
 * 1x Cat5 Ethernet cable (choose your own length, various vendors)
 
+## Flashing the SD cards:
+
+1. Download [Occidentalis](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2)
+1. Extract the disk image from the zip file.
+1. Use [PiFiller](http://ivanx.com/raspberrypi/) on Mac OSX to flash your SD cards.
+1. Insert SD cards into Raspberry Pis and confirm that they boot to a Linux prompt. User will be `pi` and password will be `raspberry` by default.
+
 ## Initial configuration:
 
 1. In `raspi-config`, expand the filesystem, reset the password, turn on SSH, turn off X at boot, and make sure that the RAM split gives the most RAM to the ARM. Save & exit `raspi-config`
