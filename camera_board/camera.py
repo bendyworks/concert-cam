@@ -1,6 +1,8 @@
-import datetime
+from time import strftime
+
 import os
 import re
+import string
 
 class Camera:
   model = ""
@@ -32,12 +34,17 @@ class Camera:
     print "USB Location: " + self.usb_location
 
   def capture_photo(self):
-    date = str(datetime.datetime.now())
-    filename = "../image_" + date + ".cr2".replace(' ', '_')
+    filename = self.generate_filename()
     print filename
 
     cmd = "gphoto2 --camera=\"" + self.model + "\" --capture-image-and-download --filename=" + filename
     print cmd
     os.popen(cmd)
 
+    return filename
+
+  def generate_filename(self):
+
+    date = strftime("%Y-%m-%d-%H:%M:%S")
+    filename = "../image_" + date + ".cr2"
     return filename
