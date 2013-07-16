@@ -7,22 +7,17 @@ class Camera:
   usb_location = ""
   def detect_gphoto(self):
     location = os.popen('which gphoto2').read().rstrip()
-    if location != "":
-      return ""
-    else:
-      return "Error: gphoto2 not found!"
+    if location == "":
+      raise Exception("gphoto2 not found!")
 
   def setup(self):
     autodetected = os.popen('gphoto2 --auto-detect').read().split('\n')
     camera_string = filter(None, autodetected)[-1].rstrip()
 
-    if not re.match("{-}+", camera_string):
-      model, usb_location = self.parse_camera_string(camera_string)
-
-      #return "Camera is: " + model + "\n" + "Location is: " + usb_location
-      return True
+    if re.match("{-}+", camera_string):
+      raise Exception("Camera cannot be found!")
     else:
-      return "Error: Camera cannot be found!"
+      self.model, self.usb_location = self.parse_camera_string(camera_string)
 
   def parse_camera_string(self, camera_string):
     camera_parts = camera_string.split()
@@ -36,7 +31,7 @@ class Camera:
     date = str(datetime.datetime.now())
     filename = "image_" + date + ".cr2"
 
-    cmd = "gphoto2 --camera \"" + self.model + "\" --capture-image-and-download --filename=" + filename
+    cmd = "gphoto2 --capture-image-and-download --filename=" + filename
     os.popen(cmd)
 
     return filename

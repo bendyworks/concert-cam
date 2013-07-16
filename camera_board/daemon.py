@@ -29,10 +29,8 @@ def snap(password):
     return go_away()
 
 if __name__ == "__main__":
-  error_msg = camera.detect_gphoto() and camera.setup()
+  camera.detect_gphoto()
+  camera.setup()
 
-  if len(error_msg) == 0:
-    app.debug = True
-    app.run()
-  else:
-    print error_msg
+  app.debug = True
+  app.run(host='0.0.0.0')
