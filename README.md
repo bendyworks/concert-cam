@@ -83,3 +83,15 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Open up vim or another text editor (make sure you're in insert mode)
 1. Pressing the button should insert a space into the document.
 1. The button is all set!
+
+## Assembling the camera board:
+
+1. Attach the 4.3" TFT panel to the Camera Raspberry Pi's composite video connector.
+1. Boot the Raspberry Pi. You should see the Pi boot up on the tiny screen.
+1. Log in (probably through SSH)
+1. Run `sudo dpkg-reconfigure console-setup`
+1. Choose UTF-8, "Guess optimal", and then you'll be at the fonts screen.
+1. This is really up to you, but we used TerminusBold at 12x24 resolution.
+1. Save the settings; the display should now have a larger font.
+1. Run `sudo raspi-config` and go to Advanced -> Overscan. Enable overscan.
+1. Reboot the Pi.
