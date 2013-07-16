@@ -1,3 +1,10 @@
+# Config files:
+camera_board/config.json
+
+# Python:
+*.pyc
+
+
 *.gem
 *.rbc
 .bundle
