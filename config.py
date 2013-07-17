@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 
 class Config:
@@ -12,4 +13,5 @@ class Config:
       setattr(self, name, value)
 
   def load_config_file(self, filename):
-    return open(filename, "r+").read()
+    current_dir = os.path.dirname(__file__)
+    return open(current_dir + '/' + filename, "r+").read()
