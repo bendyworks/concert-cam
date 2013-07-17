@@ -1,22 +1,23 @@
 from time import strftime
-
-import os
+from .sh import shell
 import re
-import string
+
 
 class Camera:
   model = ""
   usb_location = ""
+
   def detect_gphoto(self):
-    location = os.popen('which gphoto2').read().rstrip()
-    if location == "":
+    out, err = shell(['which', 'gphoto2'])
+    if not out and err:
       raise Exception("gphoto2 not found!")
+      # or raise Exception(err)
 
   def setup(self):
-    autodetected = os.popen('gphoto2 --auto-detect').read().split('\n')
+    autodetected = shell(['gphoto2', '--auto-detect'])[0].split('\n')
     camera_string = filter(None, autodetected)[-1].rstrip()
 
-    if re.match("{-}+", camera_string):
+    if re.match("-+$", camera_string):
       raise Exception("Camera cannot be found!")
     else:
       self.model, self.usb_location = self.parse_camera_string(camera_string)
@@ -37,14 +38,14 @@ class Camera:
     filename = self.generate_filename()
     print filename
 
-    cmd = "gphoto2 --camera=\"" + self.model + "\" --capture-image-and-download --filename=\"" + filename + "\""
+    cmd = ('gphoto2 --camera="%s" --capture-image-and-download '
+           '--filename="%s"') % (self.model, filename)
     print cmd
-    os.popen(cmd)
+    shell(cmd)
 
     return filename
 
   def generate_filename(self):
-
     date = strftime("%Y-%m-%d-%H:%M:%S")
-    filename = "../image_" + date + ".cr2"
+    filename = "../image_%s.cr2" % date
     return filename
