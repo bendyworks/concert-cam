@@ -1,5 +1,5 @@
 from time import strftime
-from .sh import shell
+from sh import shell
 import re
 
 
