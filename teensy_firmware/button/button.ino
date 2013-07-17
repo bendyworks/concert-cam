@@ -20,12 +20,11 @@ void loop() {
   // delays in loop(), so this runs repetitively at a rate
   // faster than the buttons could be pressed and released.
   button.update();
-  
+
   if (button.fallingEdge()) {
-    Keyboard.println("button press");
+    Keyboard.println("pressed");
   }
   if (button.risingEdge()) {
-    Keyboard.println("button release");
   }
 }
 
