@@ -91,6 +91,11 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Pressing the button should insert a space into the document.
 1. The button is all set!
 
+## Set up the button's software:
+
+1. Clone this repo onto the button Pi.
+1. Run `pip install -r requirements.txt` in the `concert_cam` directory.
+
 ## Assembling the camera board:
 
 1. Attach the 4.3" TFT panel to the Camera Raspberry Pi's composite video connector.
@@ -102,3 +107,8 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Save the settings; the display should now have a larger font.
 1. Run `sudo raspi-config` and go to Advanced -> Overscan. Enable overscan.
 1. Reboot the Pi.
+
+## Set up the camera board's software:
+
+1. Clone this repo onto the camera board Pi.
+1. Run `pip install -r requirements.txt` in the `concert_cam` directory.
