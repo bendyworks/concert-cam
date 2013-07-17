@@ -8,4 +8,4 @@ class Config:
     self.secret_key = config["secret_key"]
 
   def load_config_file(self, filename):
-    return open("camera_board/" + filename, "r+").read()
+    return open(filename, "r+").read()
