@@ -39,7 +39,7 @@ class Camera:
     print full_filename
 
     cmd = ('gphoto2 --camera="%s" --capture-image-and-download '
-           '--filename="%s"') % (self.model, full_filename)
+           '--filename=%s') % (self.model, full_filename)
     print "Running: %s" % cmd
     output = shell(cmd)
     print output
