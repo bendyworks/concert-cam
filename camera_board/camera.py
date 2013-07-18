@@ -35,17 +35,19 @@ class Camera:
     print "USB Location: " + self.usb_location
 
   def capture_photo(self):
-    filename = self.generate_filename()
-    print filename
+    base_filename, full_filename = self.generate_filename()
+    print full_filename
 
     cmd = ('gphoto2 --camera="%s" --capture-image-and-download '
-           '--filename="%s"') % (self.model, filename)
+           '--filename="%s"') % (self.model, full_filename)
     print cmd
     shell(cmd)
 
-    return filename
+    return base_filename
 
   def generate_filename(self):
+    path = '/home/pi/pictures/'
     date = strftime("%Y-%m-%d-%H:%M:%S")
-    filename = "../image_%s.cr2" % date
-    return filename
+    base_filename = "image_%s.cr2" % date
+    full_filename = path + base_filename
+    return (base_filename, full_filename)

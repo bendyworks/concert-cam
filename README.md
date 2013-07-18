@@ -102,9 +102,9 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 1. Clone this repo onto the button Pi.
 1. Run `pip install -r requirements.txt` in the `concert_cam` directory.
 
-## Getting the Button Pi to login automatically:
+## Getting the button Pi to login automatically:
 
-We want the Button Pi to login automatically and run our python script to
+We want the button Pi to login automatically and run our python script to
 receive events from the button. To do this, we only need to do a few things:
 
 1. `sudo vim /etc/inittab`
