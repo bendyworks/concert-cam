@@ -102,23 +102,31 @@ We want the Button Pi to login automatically and run our python script to
 receive events from the button. To do this, we only need to do a few things:
 
 1. `sudo vim /etc/inittab`
+
    Change the following line:
+
    ```
    1:2345:respawn:/sbin/getty --noclear 38400 tty1
    ```
+
    to this:
+
    ```
    1:2345:respawn:/bin/login -f pi tty1
    ```
+
    This will cause the Raspberry Pi to automatically log in as the `pi` user
    on boot on the first terminal.
 1. `sudo vim /etc/profile`
+
     Go to the bottom and insert:
+
     ```bash
     if [ -z "$TMUX" ]; then
       (tmux attach -t button || tmux new -s button 'python /home/pi/dev/concert_cam/button_board/listener.py')
     fi
     ```
+
     This will cause the shell to drop into a tmux session, if it isn't already
     inside a tmux session. And it runs our button listener script by default!
 1. Reboot the button board Raspberry Pi
