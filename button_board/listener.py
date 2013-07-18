@@ -18,6 +18,9 @@ while True:
   my_input = raw_input().rstrip()
 
   if my_input == "pressed":
-    print "You win!"
-    #r = requests.get(camera_request_uri)
-
+    response = requests.get(camera_request_uri)
+    if re.match("\w+.cr2$", response.text):
+      print "Picture taken! " + response.text
+      sleep (1)
+    else:
+      print "Error: " + response.text
