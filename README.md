@@ -116,7 +116,7 @@ receive events from the button. To do this, we only need to do a few things:
    ```
 
    This will cause the Raspberry Pi to automatically log in as the `pi` user
-   on boot on the first terminal.
+   on boot on the first terminal. (`tty1`)
 1. `sudo vim /etc/profile`
 
     Go to the bottom and insert:
