@@ -85,10 +85,16 @@ Format: \[quantity\]x \[what\] (\[purchased from\])
 ## Assembling the button:
 
 1. Wire the Teensy to the button (refer to [this post by Raster](http://rasterweb.net/raster/2011/05/09/the-button/))
-1. Flash the Teensy with the code from Raster's blog post with the Arduino IDE + [Teensyduino](http://www.pjrc.com/teensy/teensyduino.html) addon. (Be sure to change the pin number if your button is connected to another IO pin!)
+    * Attach one pin of the button to a GND (ground) pin and another pin from
+    the button to IO line 10.
+    * Attach the wires from the LED to the +5V and another GND pin on the
+      Teensy.
+1. Install the Arduino IDE and [Teensyduino](http://www.pjrc.com/teensy/teensyduino.html) -- follow the Teensyduino instructions!
+1. Flash the Teensy with the code from this repo's `teensy_firmware/button`
+   directory.
 1. Connect the Teensy to the Button Pi's USB hub.
-1. Open up vim or another text editor (make sure you're in insert mode)
-1. Pressing the button should insert a space into the document.
+1. Open up vim or another text editor (make sure you're in insert mode!)
+1. Pressing the button should insert the string "pressed" into the file.
 1. The button is all set!
 
 ## Set up the button's software:
