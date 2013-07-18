@@ -10,7 +10,7 @@ config = Config()
 config.load("config.json")
 
 
-camera_request_uri = config.camera_host + "/snap/" + config.secret_key
+camera_request_uri = "http://" + config.camera_host + "/snap/" + config.secret_key
 print "Posting to: " + camera_request_uri
 print "Waiting for input to continue"
 
