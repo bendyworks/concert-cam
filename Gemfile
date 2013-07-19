@@ -1,15 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.0.0'
 
-gem 'watchr'
+gem 'rb-inotify'
 gem 'pry'
-
-case RUBY_PLATFORM
-when /darwin/
-    gem 'ruby-fsevent'
-when /linux/
-    gem 'rev'
-end
-
-

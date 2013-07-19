@@ -1,17 +1,11 @@
 require 'pry'
-require 'watchr'
-require 'fsevent'
+require 'rb-inotify'
 
-script = Watchr::Script.new
-script.watch('/Users/mathiasx/Pictures/.*') { |m| puts "I would have compiled #{m[0]}" }
-handler = Watchr.handler.new
-controller = Watchr::Controller.new(script,handler)
-controller.run # blocking
+notifier = INotify::Notifier.new
 
-def put_photo(md)
-  binding.pry
-  puts system("echo #{md[0]}")
-  puts
+notifier.watch('/home/pi/pictures', :create) do |event|
+  puts "I would have compiled #{event.name}"
+  system("python /home/pi/dev/concert_cam/camera_board/watcher.py #{event.name}")
 end
 
-#watch('/Users/mathiasx/Pictures/.*') { |md| put_photo(md) }
+notifier.run
