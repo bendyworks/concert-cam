@@ -1,5 +1,7 @@
 {
-  "secret_key": "",
+  "button_host": "button.local",
   "camera_host": "camera.local",
-  "button_host": "button.local"
+  "default_filetype": "jpg",
+  "fb_oauth_access_token": "",
+  "secret_key": ""
 }

@@ -2,10 +2,10 @@ from time import strftime
 from sh import shell
 import re
 
-
 class Camera:
   model = ""
   usb_location = ""
+  config = {}
 
   def detect_gphoto(self):
     out, err = shell(['which', 'gphoto2'])
@@ -13,7 +13,9 @@ class Camera:
       raise Exception("gphoto2 not found!")
       # or raise Exception(err)
 
-  def setup(self):
+  def setup(self, config):
+    self.config = config
+
     autodetected = shell(['gphoto2', '--auto-detect'])[0].split('\n')
     camera_string = filter(None, autodetected)[-1].rstrip()
 
@@ -47,8 +49,9 @@ class Camera:
     return base_filename
 
   def generate_filename(self):
+    filetype = self.config.default_filetype
     path = '/home/pi/pictures/'
     date = strftime("%Y-%m-%d-%H:%M:%S")
-    base_filename = "image_%s.cr2" % date
+    base_filename = "image_%s.%s" % (date, filetype)
     full_filename = path + base_filename
     return (base_filename, full_filename)
