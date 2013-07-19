@@ -26,10 +26,8 @@ class ImageEventHandler(pyinotify.ProcessEvent):
     self.extensions = extension.split(',')
 
   def _run_cmd(self, event):
-    print '==> new photo detected'
-    print event
-    print event.pathname
-    #facebooker.put_photo(event.
+    print '==> new photo detected: %s' % event.path_name
+    facebooker.put_photo(event.pathname)
 
   def process_IN_CREATE(self, event):
     if all(not event.pathname.endswith(ext) for ext in self.extensions):
@@ -42,7 +40,7 @@ if __name__ == "__main__":
 
   wm = pyinotify.WatchManager()
   handler = ImageEventHandler(cwd=path, extension=extension)
-  notifier = pyinotify.Notifier(wm, default_proc_fun=handler)
-  wm.add_watch(path, pyinotify.ALL_EVENTS, rec=True, auto_add=True)
+  notifier = pyinotify.Notifier(wm, handler)
+  wm.add_watch(path, pyinotify.IN_CREATE, rec=True, auto_add=True)
   print '==> Start monitoring %s (type c^c to exit)' % path
   notifier.loop()
