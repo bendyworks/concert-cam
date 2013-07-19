@@ -33,6 +33,7 @@ class ImageEventHandler(FileSystemEventHandler):
     super(ImageEventHandler, self).on_created(event)
 
     what = 'directory' if event.is_directory else 'file'
+    print event.src_path
 
     if event.src_path.endswith("jpg"):
       print("Created %s: %s", what, event.src_path)
