@@ -47,7 +47,7 @@ class Camera:
     output = shell(cmd)
     print output
 
-    shell('touch %s' % full_filename)
+    shell('cp %s' % (full_filename, full_filename.replace('jpg','2.jpg')))
 
     return base_filename
 
