@@ -20,7 +20,8 @@ else:
   raise("Facebook OAuth could not be loaded!")
 
 if __name__ == "__main__":
-  if sys.argv[2]:
-    facebooker.put_photo(sys.argv[2])
+  file_path = sys.argv[-1]
+  if file_path and file_path.endswith('jpg'):
+    facebooker.put_photo(file_path)
   else:
     print "No image found!"
