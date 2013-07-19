@@ -27,7 +27,7 @@ print "Waiting for input to continue"
 while True:
   my_input = raw_input().rstrip()
 
-  if my_input == "pressed":
+  if re.match('p', my_input):
     response = make_request(camera_request_uri)
     if re.match("\w+.cr2$", response):
       print "Picture taken! Filename: " + response
