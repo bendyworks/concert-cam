@@ -22,7 +22,7 @@ void loop() {
   button.update();
 
   if (button.fallingEdge()) {
-    Keyboard.println("p\n");
+    Keyboard.println("press");
   }
 }
 
