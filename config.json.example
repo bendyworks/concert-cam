@@ -1,4 +1,5 @@
 {
+  "album_id": "",
   "button_host": "button.local",
   "camera_host": "camera.local",
   "default_filetype": "jpg",
