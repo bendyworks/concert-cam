@@ -1,5 +1,4 @@
 import time
-import re
 import os
 import sys
 
@@ -34,7 +33,8 @@ class ImageEventHandler(FileSystemEventHandler):
     super(ImageEventHandler, self).on_created(event)
 
     what = 'directory' if event.is_directory else 'file'
-    if re.match(".+\.jpg$", event.src_path):
+
+    if event.src_path.endswith("jpg"):
       print("Created %s: %s", what, event.src_path)
       facebooker.put_photo(event.src_path)
 
@@ -55,6 +55,7 @@ if __name__ == "__main__":
   event_handler = ImageEventHandler()
   observer = Observer()
   observer.schedule(event_handler, path=config.image_store_path, recursive=True)
+  print "Watching: %s" % config.image_store_path
   observer.start()
 
   try:
