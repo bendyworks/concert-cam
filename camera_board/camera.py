@@ -1,5 +1,6 @@
 from time import strftime
 from sh import shell
+import os
 import re
 
 class Camera:
@@ -55,5 +56,5 @@ class Camera:
     path = self.config.image_store_path
     date = strftime("%Y-%m-%d-%H:%M:%S")
     base_filename = "image_%s.%s" % (date, filetype)
-    full_filename = path + base_filename
+    full_filename = os.path.join(path, base_filename)
     return (base_filename, full_filename)
