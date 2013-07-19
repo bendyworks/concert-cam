@@ -1,12 +1,12 @@
 import facebook
 import json
 
-from config import Config
-config = Config()
-config.load("config.json")
 
 class Facebooker():
   album_id = 0
+  def set_config(self, config):
+    self.config = config
+
   def setup_oauth(self):
     global graph
 

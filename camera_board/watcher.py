@@ -10,7 +10,12 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from facebooker import Facebooker
 
+from config import Config
+config = Config()
+config.load("config.json")
+
 facebooker = Facebooker()
+facebooker.set_config(config)
 
 if facebooker.setup_oauth():
   print "Facebook OAuth loaded"

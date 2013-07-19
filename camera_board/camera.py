@@ -50,7 +50,7 @@ class Camera:
 
   def generate_filename(self):
     filetype = self.config.default_filetype
-    path = '/home/pi/pictures/'
+    path = self.config.image_store_path
     date = strftime("%Y-%m-%d-%H:%M:%S")
     base_filename = "image_%s.%s" % (date, filetype)
     full_filename = path + base_filename
