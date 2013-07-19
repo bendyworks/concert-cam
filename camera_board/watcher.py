@@ -21,10 +21,9 @@ else:
   raise("Facebook OAuth could not be loaded!")
 
 class ImageEventHandler(pyinotify.ProcessEvent):
-  def my_init(self, cwd, extension, cmd):
+  def my_init(self, cwd, extension):
     self.cwd = cwd
     self.extensions = extension.split(',')
-    self.cmd = cmd
 
   def _run_cmd(self, event):
     print '==> new photo detected'
@@ -39,9 +38,10 @@ class ImageEventHandler(pyinotify.ProcessEvent):
 
 if __name__ == "__main__":
   extension = config.default_filetype
+  path = config.image_store_path
 
   wm = pyinotify.WatchManager()
-  handler = ImageEventHandler(cwd=path, extension=extension, cmd=cmd)
+  handler = ImageEventHandler(cwd=path, extension=extension)
   notifier = pyinotify.Notifier(wm, default_proc_fun=handler)
   wm.add_watch(path, pyinotify.ALL_EVENTS, rec=True, auto_add=True)
   print '==> Start monitoring %s (type c^c to exit)' % path
