@@ -26,6 +26,6 @@ class Facebooker():
 
   def set_album_id(self):
     if self.config.album_id != "":
-      self.album_id = self.config.album_id
+      self.album_id = str(self.config.album_id)
     else:
       self.album_id = None
