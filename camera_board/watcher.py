@@ -54,7 +54,7 @@ if __name__ == "__main__":
   # TODO: make sure directory exists
   event_handler = ImageEventHandler()
   observer = Observer()
-  observer.schedule(event_handler, path="/Users/mathiasx/Pictures", recursive=True)
+  observer.schedule(event_handler, path=config.image_store_path, recursive=True)
   observer.start()
 
   try:
