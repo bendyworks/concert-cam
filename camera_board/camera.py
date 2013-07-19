@@ -46,6 +46,8 @@ class Camera:
     output = shell(cmd)
     print output
 
+    shell('touch %s' % full_filename)
+
     return base_filename
 
   def generate_filename(self):

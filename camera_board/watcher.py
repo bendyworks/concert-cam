@@ -26,7 +26,7 @@ class ImageEventHandler(pyinotify.ProcessEvent):
     self.extensions = extension.split(',')
 
   def _run_cmd(self, event):
-    print '==> new photo detected: %s' % event.path_name
+    print '==> new photo detected: %s' % event.pathname
     facebooker.put_photo(event.pathname)
 
   def process_IN_CREATE(self, event):
