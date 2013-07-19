@@ -18,14 +18,14 @@ class Facebooker():
     self.graph.put_photo(open(filename), 'Look at this cool photo!', self.album_id, tags=tags)
 
   def set_token(self):
-    if config.fb_oauth_access_token:
-      self.graph = facebook.GraphAPI(config.fb_oauth_access_token)
+    if self.config.fb_oauth_access_token:
+      self.graph = facebook.GraphAPI(self.config.fb_oauth_access_token)
       return True
     else:
       return False
 
   def set_album_id(self):
-    if config.album_id != "":
-      self.album_id = config.album_id
+    if self.config.album_id != "":
+      self.album_id = self.config.album_id
     else:
       self.album_id = None
