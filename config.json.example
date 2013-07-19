@@ -3,6 +3,7 @@
   "button_host": "button.local",
   "camera_host": "camera.local",
   "default_filetype": "jpg",
+  "event_name": "Super cool concert!",
   "fb_oauth_access_token": "",
   "image_store_path": "/home/pi/pictures",
   "secret_key": ""

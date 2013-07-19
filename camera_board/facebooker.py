@@ -15,7 +15,7 @@ class Facebooker():
 
   def put_photo(self, filename):
     tags = json.dumps([])
-    self.graph.put_photo(open(filename), 'Look at this cool photo!', self.album_id, tags=tags)
+    self.graph.put_photo(open(filename), self.config.event_name, self.album_id, tags=tags)
 
   def set_token(self):
     if self.config.fb_oauth_access_token:
