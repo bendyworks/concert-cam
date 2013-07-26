@@ -1,2 +1,2 @@
-require './concert_cam'
+require './server'
 run ConcertCam
