@@ -5,16 +5,21 @@
   </head>
   <body>
     <div id="fb-root"></div>
+    <dl>
+      <dt>access token:</dt>
+      <dd><input type="text" id="accessToken"/></dd>
+    </dl>
     <script>
       var host = 'hidden-peak-7185',
-        appid = '305242886279210';
+        app_id = '305242886279210',
+        page_id = '180178628821047';
 
       window.authResp = '';
       window.fbAsyncInit = function() {
         console.log('initing');
 
         FB.init({
-          appId: appid,
+          appId: app_id,
           channelUrl: '//' + host + '/channel.html',
           status: true,
           xfbml: true
@@ -27,7 +32,9 @@
           if (response.authResponse) {
             console.log('Logged in');
             FB.api('/me/accounts', function(response) {
-              console.log('accounts: ');
+              var page = _.detect(response.data, function(page) { return page.id === page_id; });
+              document.getElementById('accessToken').value = page.access_token;
+              console.log('access_token: ');
               console.log(response);
             });
           } else {
@@ -44,3 +51,6 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js'></script>
+  </body>
+</html>
