@@ -2,7 +2,7 @@ require 'serialport'
 
 class Scoreboard
   def initialize
-    port = '/dev/cu.usbmodemfa1321'
+    port = '/dev/cu.usbmodemfa1261'
     @sp = SerialPort.open port, 38400
     at_exit do
       @sp.close

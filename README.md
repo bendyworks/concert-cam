@@ -5,6 +5,7 @@
 * Install rvm
 * Install photo2 (e.g., `brew install gphoto2`)
 * Make sure the camera is in Manual Focus
+* Install Virtual COM Port (VCP) driver from [FTDI](http://www.ftdichip.com/Drivers/VCP.htm). The dmg is also in the `vendor` folder of this repository.
 
 ## Run
 
