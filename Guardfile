@@ -6,10 +6,12 @@ module ::Guard
     def initialize(watchers = [], options = {})
       super
       @uploader = Uploader.new
+      puts "Initialized uploader"
     end
 
     def run_on_additions(paths)
       paths.each do |path|
+        puts "Photo detected: #{path}"
         @uploader.process_photo(path)
       end
     end

@@ -1,7 +1,9 @@
 require 'faraday'
 require 'json'
 
+raise "No Slack Token Set in ENV['SLACK_TOKEN']" unless ENV['SLACK_TOKEN']
 uri = "https://bendyworks.slack.com/services/hooks/incoming-webhook?token=#{ENV['SLACK_TOKEN']}"
+
 
 while true do
   payload = {

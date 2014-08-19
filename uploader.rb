@@ -35,6 +35,7 @@ class Uploader
         req.headers['Content-Type'] = 'application/json'
         req.body = JSON.generate(payload)
       end
+      puts "Slacked."
     rescue
       puts "Could not post to Slack. Check ENV['SLACK_TOKEN'] and if Slack is up."
     end
@@ -42,6 +43,7 @@ class Uploader
 
   def add_to_facebook(local_path)
     @graph.put_picture(local_path, {message: "Taken on #{path_to_time(local_path)}"}, @album_id)
+    puts "Tried to upload photo."
   end
 
   def archive_photo(local_path)
