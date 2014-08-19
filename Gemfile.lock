@@ -79,6 +79,7 @@ PLATFORMS
 
 DEPENDENCIES
   artoo
+  faraday
   guard
   hybridgroup-serialport
   koala
