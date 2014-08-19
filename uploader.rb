@@ -21,17 +21,22 @@ class Uploader
   end
 
   def post_success_notice
-    uri = "https://bendyworks.slack.com/services/hooks/incoming-webhook?token=#{ENV['SLACK_TOKEN']}"
+    # Failure to post Slack should not block the Facebook uploader
+    begin
+      uri = "https://bendyworks.slack.com/services/hooks/incoming-webhook?token=#{ENV['SLACK_TOKEN']}"
 
-    payload = {
-      "username" => "concert_cam",
-      "text" => "Uploaded photo!"
-    }
+      payload = {
+        "username" => "concert_cam",
+        "text" => "Uploaded photo!"
+      }
 
-    Faraday.post do |req|
-      req.url uri
-      req.headers['Content-Type'] = 'application/json'
-      req.body = JSON.generate(payload)
+      Faraday.post do |req|
+        req.url uri
+        req.headers['Content-Type'] = 'application/json'
+        req.body = JSON.generate(payload)
+      end
+    rescue
+      puts "Could not post to Slack. Check ENV['SLACK_TOKEN'] and if Slack is up."
     end
   end
 
