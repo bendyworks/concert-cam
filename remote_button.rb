@@ -4,7 +4,7 @@ require_relative './debouncer'
 
 class RemoteButton
   def initialize
-    @port = '/dev/tty.usbserial-A601EYK8'
+    @port = '/dev/cu.usbserial-A601EYK8'
   end
 
   def listen &blk
@@ -12,6 +12,7 @@ class RemoteButton
       read_data_frames(sp) do |bytes|
         if button_pressed?(bytes)
           debouncer.trigger do
+            puts "triggered"
             blk.call
           end
         end

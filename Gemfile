@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+
+# heads up: last Brad checked, nio4r (a dep) doesn't compile with 2.2.0
+ruby '2.1.2'
 
 gem 'sinatra'
 gem 'koala'

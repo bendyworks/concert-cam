@@ -12,9 +12,9 @@ class Scoreboard
   def show sym
     str =
       case sym
-      when :three then wrap_binary(three)
-      when :two then wrap_binary(two)
-      when :one then wrap_binary(one)
+      when :three then three
+      when :two then two
+      when :one then one
       when :all then all_leds
       when :blank then blank
       end
@@ -22,15 +22,15 @@ class Scoreboard
   end
 
   def three
-    [0x38, 0x08, 0x38, 0x0E]
+    "C3333000\n"
   end
 
   def two
-    [0x31, 0x01, 0x38, 0x0E]
+    "C2222000\n"
   end
 
   def one
-    [0x08, 0x08, 0x08, 0x0C]
+    "C1111000\n"
   end
 
   def all_leds

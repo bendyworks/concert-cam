@@ -19,6 +19,13 @@ module ::Guard
       end
     end
 
+    def watermark(path)
+      dest = path.sub('/raw/', '/watermarked/')
+      watermark_path = File.expand_path('../watermark.png', __FILE__)
+      `composite -watermark 70% -gravity northwest #{watermark_path} #{path} #{dest}`
+      dest
+    end
+
     def add_to_facebook(path)
       @graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
       dest = path.sub('/raw/', '/uploaded/')
