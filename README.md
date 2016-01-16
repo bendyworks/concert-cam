@@ -22,9 +22,13 @@ Run this first with the following:
 * `cd photos/raw`
 * `ruby ../../camera_controller.rb`
 
+### Mac OS X program
+
+Run the Mac OS X program and take note of the PID that it outputs in the console.
+
 ### Button Listener
 
-Run this after camera_controller.rb. Copy the gphoto2 proc that was output by camera_controller and insert it in the command:
+Run this after the Mac OS X program. Copy the proc ID that was output by the Mac OS X program and insert it in the command:
 
 * (be in git root)
 * `ruby button_listener.rb <pid_from_camera_controller.rb>`

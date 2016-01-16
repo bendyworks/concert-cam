@@ -2,33 +2,48 @@ require 'guard/guard'
 require 'koala'
 require 'fileutils'
 
-module ::Guard
-  class FacebookUpload < Guard
-    def initialize(watchers = [], options = {})
-      super
-      access_token = ENV['ACCESS_TOKEN']
-      raise "No Access Token" unless access_token
-      @album_id = ENV['ALBUM_ID']
-      raise "No Album Id" unless @album_id
-      @graph = Koala::Facebook::API.new(access_token)
-    end
-
-    def run_on_additions(paths)
+module RunOnAdditions
+  def on_add(method_name)
+    define_method :run_on_additions do |paths|
       paths.each do |path|
-        add_to_facebook(path)
+        send(method_name, path)
       end
     end
+  end
+end
 
-    def watermark(path)
+module ::Guard
+  class Watermarker < Guard
+    extend RunOnAdditions
+    on_add :do_watermark
+
+    def do_watermark(path)
       dest = path.sub('/raw/', '/watermarked/')
       watermark_path = File.expand_path('../watermark.png', __FILE__)
-      `composite -watermark 70% -gravity northwest #{watermark_path} #{path} #{dest}`
-      dest
+      watermark_size = `identify -format "%G" #{watermark_path}`.split("x").map(&:to_i)
+      image_size = `identify -format "%G" #{path}`
+      watermark_width = (image_size.split("x").last.to_i * 0.15).to_i
+      watermark_height = (watermark_width.to_f * watermark_size[1].to_f / watermark_size[0]).to_i
+      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+50 -depth 8 #{dest}`
+    end
+  end
+
+  class FacebookUpload < Guard
+    extend RunOnAdditions
+    on_add :add_to_facebook
+
+    def initialize(watchers = [], options = {})
+      super
+      #access_token = ENV['ACCESS_TOKEN']
+      #raise "No Access Token" unless access_token
+      #@album_id = ENV['ALBUM_ID']
+      #raise "No Album Id" unless @album_id
+      #@graph = Koala::Facebook::API.new(access_token)
     end
 
     def add_to_facebook(path)
-      @graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
-      dest = path.sub('/raw/', '/uploaded/')
+      #@graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
+      dest = path.sub('/watermarked/', '/uploaded/')
       FileUtils.mv(path, dest)
     end
 
@@ -42,7 +57,11 @@ module ::Guard
 end
 
 group :camera do
-  guard :facebook_upload do
+  guard :watermarker do
     watch %r{photos/raw/(.*)}
+  end
+
+  guard :facebook_upload do
+    watch %r{photos/watermarked/(.*)}
   end
 end
