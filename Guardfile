@@ -24,7 +24,7 @@ module ::Guard
       image_size = `identify -format "%G" #{path}`
       watermark_width = (image_size.split("x").last.to_i * 0.15).to_i
       watermark_height = (watermark_width.to_f * watermark_size[1].to_f / watermark_size[0]).to_i
-      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+50 -depth 8 #{dest}`
+      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1000 -depth 8 #{dest}`
     end
   end
 
@@ -34,15 +34,15 @@ module ::Guard
 
     def initialize(watchers = [], options = {})
       super
-      #access_token = ENV['ACCESS_TOKEN']
-      #raise "No Access Token" unless access_token
-      #@album_id = ENV['ALBUM_ID']
-      #raise "No Album Id" unless @album_id
-      #@graph = Koala::Facebook::API.new(access_token)
+      access_token = ENV['ACCESS_TOKEN']
+      raise "No Access Token" unless access_token
+      @album_id = ENV['ALBUM_ID']
+      raise "No Album Id" unless @album_id
+      @graph = Koala::Facebook::API.new(access_token)
     end
 
     def add_to_facebook(path)
-      #@graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
+      @graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
       dest = path.sub('/watermarked/', '/uploaded/')
       FileUtils.mv(path, dest)
     end

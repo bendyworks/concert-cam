@@ -31,7 +31,7 @@ Run the Mac OS X program and take note of the PID that it outputs in the console
 Run this after the Mac OS X program. Copy the proc ID that was output by the Mac OS X program and insert it in the command:
 
 * (be in git root)
-* `ruby button_listener.rb <pid_from_camera_controller.rb>`
+* `ruby button_listener.rb <pid>`
 
 ### Guardfile
 
