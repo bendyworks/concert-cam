@@ -1,6 +1,7 @@
 require 'guard/guard'
 require 'koala'
 require 'fileutils'
+require 'pathname'
 
 module RunOnAdditions
   def on_add(method_name)
@@ -18,13 +19,20 @@ module ::Guard
     on_add :do_watermark
 
     def do_watermark(path)
-      dest = path.sub('/raw/', '/watermarked/')
+      pn = Pathname.new(path)
+      dest = pn.dirname + "../watermarked/" + pn.basename
       watermark_path = File.expand_path('../watermark.png', __FILE__)
+      bendylogo_path = File.expand_path('../photos/bendyworks-logo.png', __FILE__)
       watermark_size = `identify -format "%G" #{watermark_path}`.split("x").map(&:to_i)
+      logo_size = `identify -format "%G" #{bendylogo_path}`.split("x").map(&:to_i)
       image_size = `identify -format "%G" #{path}`
-      watermark_width = (image_size.split("x").last.to_i * 0.15).to_i
+      watermark_width = (image_size.split("x").last.to_i * 0.2).to_i
       watermark_height = (watermark_width.to_f * watermark_size[1].to_f / watermark_size[0]).to_i
-      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1000 -depth 8 #{dest}`
+      logo_width = (image_size.split("x").last.to_i * 0.25).to_i
+      logo_height = (logo_width.to_f * logo_size[1].to_f / logo_size[0]).to_i
+      puts "watermarking #{path} to #{dest}"
+      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1150 -depth 8 #{path}`
+      `convert -composite #{path} #{bendylogo_path} -geometry #{logo_width}x#{logo_height}+1575+1190 -depth 8 #{dest}`
     end
   end
 
@@ -42,7 +50,9 @@ module ::Guard
     end
 
     def add_to_facebook(path)
-      @graph.put_picture(path, {message: "Taken on #{path_to_time(path)}"}, @album_id)
+      puts "adding #{path} to Facebook"
+      resp = @graph.put_picture(path, {caption: "Taken on #{path_to_time(path)}"}, @album_id)
+      puts "got #{resp}"
       dest = path.sub('/watermarked/', '/uploaded/')
       FileUtils.mv(path, dest)
     end

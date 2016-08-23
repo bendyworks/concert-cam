@@ -10,5 +10,4 @@ button = RemoteButton.new
 button.listen do
   puts "button pressed at #{Time.now}"
   Process.kill("USR1", camera_pid)
-
 end

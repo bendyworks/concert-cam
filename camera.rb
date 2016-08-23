@@ -23,7 +23,7 @@ class Camera
   end
 
   def start
-    cmd = "gphoto2 --capture-image-and-download --interval=-1 --filename='loks-%n-%Y-%m-%d_%H-%M-%S.%C' --port=#{@port}"
+    cmd = "gphoto2 --capture-image-and-download --interval=-1 --filename='loks-%Y-%m-%d_%H-%M-%S-%n.%C' --port=#{@port}"
     IO.popen(cmd) do |cam_proc|
       puts "gphoto2 proc: #{cam_proc.pid}"
       while str = cam_proc.readline.strip
