@@ -1,5 +1,5 @@
 class Debouncer
-  def initialize(timeout = 14.5)
+  def initialize(timeout = 15.5)
     @triggered_at = Time.now
     @timeout = timeout
   end
