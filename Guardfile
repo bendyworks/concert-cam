@@ -21,7 +21,7 @@ module ::Guard
     def do_watermark(path)
       pn = Pathname.new(path)
       dest = pn.dirname + "../watermarked/" + pn.basename
-      watermark_path = File.expand_path('../watermark.png', __FILE__)
+      watermark_path = File.expand_path('../watermark.jpg', __FILE__)
       bendylogo_path = File.expand_path('../photos/bendyworks-logo.png', __FILE__)
       watermark_size = `identify -format "%G" #{watermark_path}`.split("x").map(&:to_i)
       logo_size = `identify -format "%G" #{bendylogo_path}`.split("x").map(&:to_i)
@@ -31,7 +31,8 @@ module ::Guard
       logo_width = (image_size.split("x").last.to_i * 0.25).to_i
       logo_height = (logo_width.to_f * logo_size[1].to_f / logo_size[0]).to_i
       puts "watermarking #{path} to #{dest}"
-      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1150 -depth 8 #{path}`
+
+      `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1000 -depth 8 #{path}`
       `convert -composite #{path} #{bendylogo_path} -geometry #{logo_width}x#{logo_height}+1575+1190 -depth 8 #{dest}`
     end
   end
