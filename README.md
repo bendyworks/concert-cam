@@ -50,3 +50,30 @@ Then go to (http://hidden-peak-7185.herokuapp.com/index.html)[http://hidden-peak
 With the token from there, run the following:
 
 * `ACCESS_TOKEN=<access_token> ALBUM_ID=<album_id> bundle exec guard`
+
+### Long Running Facebook Tokens
+
+A short lived facebook token only lasts about an hour or two, not enough time for most events.  A long lived token will last 60 days and helps you avoid the event headache of having to refresh tokens. This process assumes you've received admin access to the events Facebook page.  (Note: Make sure you recieve full admin and not editor or any of the other permission levels.  Full admin is the only way to go.    
+
+To start you'll have to get a short lived token.  Ask Ryan Corbin, Brad Grzesiak, or Will Strinz for access to the app on Facebook.  Once given access you should be able to view the app on:
+
+https://developers.facebook.com/apps
+
+Once you've achieved that proceed to:
+
+https://developers.facebook.com/tools/explorer
+
+Select the dropdown labeled "Graph API Explorer" and switch it to Concert Cam.  Then select the "Get Token" dropdown and switch it to the page of your choice.  This is the short lived token, save it to a notepad.
+
+Proceed back to the developers app page and open the concert cam app.  Take the App ID and App secret and save those as well.  
+
+Construct a URL by filling in the spots with the respective items:
+
+https://graph.facebook.com/oauth/<SHORT_LIVED_TOKEN>?             
+   client_id=<APP_ID>&
+   client_secret=<APP_SECRET>&
+   grant_type=<fb_exchange_token>&
+
+Plugging this into a browser will give you a page with the token and it's expiration date.  Shed the expiration date section you will have a long lived token.  Plug that in to the guard file command:
+
+* `ACCESS_TOKEN=<access_token> ALBUM_ID=<album_id> bundle exec guard`
