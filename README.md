@@ -33,6 +33,14 @@ Run this after the Mac OS X program. Copy the proc ID that was output by the Mac
 * (be in git root)
 * `ruby button_listener.rb <pid>`
 
+### Testing Script
+
+You can use the `take_picture.rb` script to test the project without having to hook up the button and the XBee:
+
+* `ruby take_listener.rb <pid>`
+
+Substituting `<pid>` for either the pid of the gPhoto pid or the Swift pid.
+
 ### Guardfile
 
 First, you'll need to create an album on facebook under the ConcertCam account. Create an album, uploading a dummy photograph that can be deleted later. On the URL of the album, grab the integer that's after the 'set=a.'. That's the album ID.
