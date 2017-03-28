@@ -37,7 +37,7 @@ Run this after the Mac OS X program. Copy the proc ID that was output by the Mac
 
 You can use the `take_picture.rb` script to test the project without having to hook up the button and the XBee:
 
-* `ruby take_listener.rb <pid>`
+* `ruby take_picture.rb <pid>`
 
 Substituting `<pid>` for either the pid of the gPhoto pid or the Swift pid.
 
