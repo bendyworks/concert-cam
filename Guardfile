@@ -21,19 +21,46 @@ module ::Guard
     def do_watermark(path)
       pn = Pathname.new(path)
       dest = pn.dirname + "../watermarked/" + pn.basename
-      watermark_path = File.expand_path('../watermark.jpg', __FILE__)
+
+      watermark_path = File.expand_path('../watermark.png', __FILE__)
+      watermark2_path = File.expand_path('../watermark2.png', __FILE__)
+      watermark3_path = File.expand_path('../watermark3.png', __FILE__)
       bendylogo_path = File.expand_path('../photos/bendyworks-logo.png', __FILE__)
+      magnet_logo_path = File.expand_path('../magnet_logo.png', __FILE__)
+
       watermark_size = `identify -format "%G" #{watermark_path}`.split("x").map(&:to_i)
+      watermark2_size = `identify -format "%G" #{watermark2_path}`.split("x").map(&:to_i)
+      watermark3_size = `identify -format "%G" #{watermark3_path}`.split("x").map(&:to_i)
+
       logo_size = `identify -format "%G" #{bendylogo_path}`.split("x").map(&:to_i)
+      magnet_logo_size = `identify -format "%G" #{magnet_logo_path}`.split("x").map(&:to_i)
       image_size = `identify -format "%G" #{path}`
+
       watermark_width = (image_size.split("x").last.to_i * 0.2).to_i
       watermark_height = (watermark_width.to_f * watermark_size[1].to_f / watermark_size[0]).to_i
+
+      watermark2_width = (image_size.split("x").last.to_i * 0.2).to_i
+      watermark2_height = (watermark2_width.to_f * watermark2_size[1].to_f / watermark2_size[0]).to_i
+
+      watermark3_width = (image_size.split("x").last.to_i * 0.2).to_i
+      watermark3_height = (watermark3_width.to_f * watermark3_size[1].to_f / watermark3_size[0]).to_i
+
+      watermark_width = (image_size.split("x").last.to_i * 0.2).to_i
+      watermark_height = (watermark_width.to_f * watermark_size[1].to_f / watermark_size[0]).to_i
+
       logo_width = (image_size.split("x").last.to_i * 0.25).to_i
       logo_height = (logo_width.to_f * logo_size[1].to_f / logo_size[0]).to_i
+
+      magnet_logo_width = (image_size.split("x").last.to_i * 0.25).to_i
+      magnet_logo_height = (magnet_logo_width.to_f * magnet_logo_size[1].to_f / magnet_logo_size[0]).to_i
+
       puts "watermarking #{path} to #{dest}"
 
       `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1000 -depth 8 #{path}`
-      `convert -composite #{path} #{bendylogo_path} -geometry #{logo_width}x#{logo_height}+1575+1190 -depth 8 #{dest}`
+      `convert -composite #{path} #{watermark2_path} -geometry #{watermark2_width}x#{watermark2_height}+900+1150 -depth 8 #{path}`
+      `convert -composite #{path} #{watermark3_path} -geometry #{watermark3_width}x#{watermark3_height}+1600+1000 -depth 8 #{path}`
+      `convert -composite #{path} #{magnet_logo_path} -geometry #{magnet_logo_width}x#{magnet_logo_height}+50+10 -depth 8 #{path}`
+      `convert -composite #{path} #{bendylogo_path} -geometry #{logo_width}x#{logo_height}+1575+40 -depth 8 #{dest}`
     end
   end
 
