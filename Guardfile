@@ -57,9 +57,9 @@ module ::Guard
       puts "watermarking #{path} to #{dest}"
 
       `convert -composite #{path} #{watermark_path} -geometry #{watermark_width}x#{watermark_height}+50+1000 -depth 8 #{path}`
-      `convert -composite #{path} #{watermark2_path} -geometry #{watermark2_width}x#{watermark2_height}+900+1150 -depth 8 #{path}`
-      `convert -composite #{path} #{watermark3_path} -geometry #{watermark3_width}x#{watermark3_height}+1600+1000 -depth 8 #{path}`
-      `convert -composite #{path} #{magnet_logo_path} -geometry #{magnet_logo_width}x#{magnet_logo_height}+50+10 -depth 8 #{path}`
+      `convert -composite #{path} #{watermark2_path} -geometry #{watermark2_width}x#{watermark2_height}+825+1150 -depth 8 #{path}`
+      `convert -composite #{path} #{watermark3_path} -geometry #{watermark3_width}x#{watermark3_height}+1650+1000 -depth 8 #{path}`
+      `convert -composite #{path} #{magnet_logo_path} -geometry #{magnet_logo_width}x#{magnet_logo_height}+25+10 -depth 8 #{path}`
       `convert -composite #{path} #{bendylogo_path} -geometry #{logo_width}x#{logo_height}+1575+40 -depth 8 #{dest}`
     end
   end
@@ -79,7 +79,7 @@ module ::Guard
 
     def add_to_facebook(path)
       puts "adding #{path} to Facebook"
-      resp = @graph.put_picture(path, {caption: "Taken on #{path_to_time(path)}"}, @album_id)
+      resp = @graph.put_picture(path, {caption: "Taken by Bendyworks' Big Green Button (#{path_to_time(path)})"}, @album_id)
       puts "got #{resp}"
       dest = path.sub('/watermarked/', '/uploaded/')
       FileUtils.mv(path, dest)
