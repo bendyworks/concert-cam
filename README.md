@@ -77,11 +77,13 @@ Proceed back to the developers app page and open the concert cam app.  Take the 
 
 Construct a URL by filling in the spots with the respective items:
 
+```
 https://graph.facebook.com/oauth/access_token?
-    client_id=<APP_ID>&
-    client_secret=<APP_SECRET>&
-    grant_type=fb_exchange_token&
-    fb_exchange_token=<SHORT_LIVED_TOKEN>
+client_id=<APP_ID>&
+client_secret=<APP_SECRET>&
+grant_type=fb_exchange_token&
+fb_exchange_token=<SHORT_LIVED_TOKEN>
+```
 
 Plugging this into a browser will give you a page with the token and it's expiration date.  Shed the expiration date section you will have a long lived token.  Plug that in to the guard file command:
 
